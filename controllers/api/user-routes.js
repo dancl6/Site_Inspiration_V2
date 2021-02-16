@@ -76,16 +76,8 @@ router.post('/', (req, res) => {
         // quotes_id: req.body.quotes_id
     })
    
-    .then(dbUserData =>{
-        console.log("id  is: ", dbUserData.id)
-        // signToken(req.body.username, req.body.email, req.body.id)
-    //    const token = signToken(dbUserData.username, dbUserData.email, dbUserData.id)
-       console.log("token is :", token)
-    //    let userArray = [dbUserData, token]
-    
-        // res.json(userArray)})
-        res.json(dbUserdata)
-        })
+    .then(dbUserData => res.json(dbUserData))
+        
         .catch(err => res.status(500).json(err));
     });
 
