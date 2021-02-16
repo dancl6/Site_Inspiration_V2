@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const passport = require('../../utils/passport');
+// const passport = require('../../utils/passport');
 const isAuth = require('../../utils/middleware/isAuth');
 const { signToken } = require('../../utils/auth')
 
@@ -82,29 +82,29 @@ router.post('/', (req, res) => {
     });
 
 // Update user table with dark mode toggle preference. Successfully updates value in table, but future implementation needed to retreive value from table and load into localstorage on login
-router.put('/dm', (req, res) => {
-    if (typeof req.session.passport != 'undefined') {
-        User.update({
-            dark_mode: req.body.dark_mode
-        }, 
-        {
-            where: {
-                id: req.session.passport.user.id
-            }
-        })
-        .then(dbUserData => {
-            if (!dbUserData[0]) {
-                res.status(404).json({ message: 'No user found with this id' });
-                return;
-            }
-            console.log(`Successfully updated user table for ${req.session.passport.user.username} and dark mode is ${req.body.dark_mode}`)
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-    }
-});
+// router.put('/dm', (req, res) => {
+//     if (typeof req.session.passport != 'undefined') {
+//         User.update({
+//             dark_mode: req.body.dark_mode
+//         }, 
+//         {
+//             where: {
+//                 id: req.session.passport.user.id
+//             }
+//         })
+//         .then(dbUserData => {
+//             if (!dbUserData[0]) {
+//                 res.status(404).json({ message: 'No user found with this id' });
+//                 return;
+//             }
+//             console.log(`Successfully updated user table for ${req.session.passport.user.username} and dark mode is ${req.body.dark_mode}`)
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.status(500).json(err);
+//         });
+//     }
+// });
 
 //PUT update user
 router.put('/:id', (req, res) => {
@@ -144,14 +144,14 @@ router.delete('/:id', (req, res) => {
 /**
  * Post client errors in order to log them
  */
-router.post('/logger/log-client-errors', (req, res) => {
-    let error           = req.body.error.message;
-    let errorInfo       = req.body.error.stack;
+// router.post('/logger/log-client-errors', (req, res) => {
+//     let error           = req.body.error.message;
+//     let errorInfo       = req.body.error.stack;
 
-    // send these errors to some service or to a logger (ex: winston)
-    //ex: logger.error(`The app received a new client log: ${error} ${errorInfo}`);
+//     // send these errors to some service or to a logger (ex: winston)
+//     //ex: logger.error(`The app received a new client log: ${error} ${errorInfo}`);
 
-    res.status(200);
-})
+//     res.status(200);
+// })
 
 module.exports = router

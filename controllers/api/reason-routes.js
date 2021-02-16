@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Reason } = require('../../models');
-const passport = require('../../utils/passport');
+// const passport = require('../../utils/passport');
 const isAuth = require('../../utils/middleware/isAuth');
 
 // GET all reasons

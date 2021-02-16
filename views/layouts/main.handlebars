@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Stop-N-Shop</title>
-    <link rel="stylesheet" href="/css/dark-mode.css" />
+    {{!-- <link rel="stylesheet" href="/css/dark-mode.css" /> --}}
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.0/font/css/open-iconic-bootstrap.min.css" />    
   </head>
@@ -24,7 +24,7 @@
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/products">Products</a>
             </li>
-            {{#if loggedIn}}
+            {{!-- {{#if loggedIn}} --}}
             <li class="nav-item active">
               <button id="logout" class="btn dark-mode-light-text">Logout</button>
             </li>
@@ -34,7 +34,7 @@
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/product-inventory">Product Inventory</a>
             </li> 
-            {{else}}
+            {{!-- {{else}} --}}
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/login" id="login">Login</a>
             </li>
