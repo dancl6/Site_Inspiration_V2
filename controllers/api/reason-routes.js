@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Reason } = require('../../models');
 // const passport = require('../../utils/passport');
-const isAuth = require('../../utils/middleware/isAuth');
+// const isAuth = require('../../utils/middleware/isAuth');
 
 // GET all reasons
 router.get('/', (req, res) => {

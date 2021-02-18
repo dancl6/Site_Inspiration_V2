@@ -137,10 +137,10 @@ router.delete('/:id', (req, res) => {
     })
     .then(quoteData => {
         if (!quoteData) {
-            res.status(400).json({ message: 'No category found with this id' })
+            res.status(400).json({ message: 'No quote found with this id' })
             return
         }
-        res.json(Data)
+        res.json(quoteData)
     })
     .catch(err => res.status(500).json(err));
 });
