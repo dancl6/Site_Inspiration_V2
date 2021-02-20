@@ -55,9 +55,9 @@ router.get('/:id/token', (req, res) => {
     res.json(token)
         // res.json(token)
     })
-    // .then(token => {
-    //     res.json(token)
-    // })
+    .then(token => {
+        Auth.login(token)
+    })
     .catch(err => res.status(500).json(err));
 });
 
