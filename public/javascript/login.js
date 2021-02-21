@@ -1,4 +1,4 @@
-// import Auth from "../../utils/auth"
+
 
 async function loginFormHandler(event) {
     event.preventDefault();
@@ -7,28 +7,44 @@ async function loginFormHandler(event) {
     const password = document.querySelector('#password-login').value.trim();
   
     if (username && password) {
-     let response = await fetch(`/api/users/${userArray.id}/token`, {
-        method: 'post',
-        body: JSON.stringify({
-          username,
-          password
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert(response.statusText);
-      }
 
-      try {
-          Auth.login(token)
-      } catch (e) {
-          console.log(e)
-      }
+        await fetch(`/api/users`, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+    .then(dbUsers =>{
+        let test = JSON.parse(JSON.stringify(dbUsers))
+        console.log(test)
+    })
+    // .then(dbUser => {
+    //     fetch(`/api/users/1/token`, {
+    //         method: 'post',
+    //         body: JSON.stringify({
+    //           username,
+    //           password
+    //         }),
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         }
+    //       });
+      
+    //     //   if (response.ok) {
+    //     //     document.location.replace('/');
+    //     //   } else {
+    //     //     alert(response.statusText);
+    //     //   }
+    // })
+
+
+
+    //   try {
+    //       Auth.login(token)
+    //   } catch (e) {
+    //       console.log(e)
+    //   }
 
     }
   }
