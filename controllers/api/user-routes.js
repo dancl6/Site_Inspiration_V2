@@ -5,6 +5,7 @@ const { User } = require('../../models');
 // const isAuth = require('../../utils/middleware/isAuth');
 const { signToken } = require('../../utils/auth')
 const bcrypt = require('bcrypt');
+// const Auth = require ("../../utils/auth2")
 // const hash = require('../../public/javascript/hash')
 
 // GET all users
@@ -61,6 +62,12 @@ router.post('/login', function(req,res) {
         // console.log("login password 3 is:", testPassword)
         var passwordIsValid = bcrypt.compareSync( req.body.password,  parse.password)
         console.log("is password valid test:", passwordIsValid)
+
+        if(passwordIsValid) {
+        var token = signToken(parse.username, parse.email, parse.id)
+        // Auth.login(token)
+        console.log("token is :", token)
+        }
     })
 
 
