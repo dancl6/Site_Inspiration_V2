@@ -60,24 +60,24 @@ router.get('/token/:username', (req, res) => {
 });
 
 //GET single user and sign token then return token
-router.get(`/token/:username`, (req, res) => {
-    User.findOne({
-        where: {
-            username: req.params.username
-        },
-        attributes: { exclude: ['password'] }
-    })
-    .then(dbUserData => {
-        console.log(dbUserData)
-        // console.log("username is :", username)
-        res.json(dbUserData)
-    }) 
-    // .catch(err => res.status(500).json(err));
-    // .then(token => {
-    //     Auth.login(token)
-    // })
-    .catch(err => res.status(500).json(err));
-});
+// router.get(`/token/:username`, (req, res) => {
+//     User.findOne({
+//         where: {
+//             username: req.params.username
+//         },
+//         attributes: { exclude: ['password'] }
+//     })
+//     .then(dbUserData => {
+//         console.log(dbUserData)
+//         // console.log("username is :", username)
+//         res.json(dbUserData)
+//     }) 
+//     // .catch(err => res.status(500).json(err));
+//     // .then(token => {
+//     //     Auth.login(token)
+//     // })
+//     .catch(err => res.status(500).json(err));
+// });
 
 // use passport to authenticate login. if invalid credentials, passport will return unauthorized
 // router.post('/login', passport.authenticate('local'), function(req, res) {
