@@ -8,17 +8,35 @@ async function loginFormHandler(event) {
   
     if (username && password) {
 
-        await fetch(`/api/users/token/${username}`, {
-            method: 'GET',
+        const response = await fetch('/api/users/login', {
+            method: 'post',
+            body: JSON.stringify({
+                username,
+                password
+            }),
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
-          })
-    .then(dbUsers =>{
+        })
+
+        if (response.ok) {
+            document.location.replace('/')
+        } else {
+            alert(response.statusText)
+        }
+
+        // await fetch(`/api/users/token/${username}/${password}`, {
+        //     method: 'GET',
+        //     headers: {
+        //       'Accept': 'application/json',
+        //       'Content-Type': 'application/json'
+        //     }
+        //   })
+
+    // .then(dbUsers =>{
         // let test = JSON.parse(JSON.stringify(dbUsers))
         // console.log(dbUsers.username)
-    })
+    // })
     // .then(dbUser => {
     //     fetch(`/api/users/1/token`, {
     //         method: 'post',
@@ -46,8 +64,8 @@ async function loginFormHandler(event) {
     //       console.log(e)
     //   }
 
-    }
+    // }
   }
-  
+}
   document.querySelector('#submitButton').addEventListener('click', loginFormHandler);
   

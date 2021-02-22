@@ -4,6 +4,8 @@ const { User } = require('../../models');
 // const passport = require('../../utils/passport');
 // const isAuth = require('../../utils/middleware/isAuth');
 const { signToken } = require('../../utils/auth')
+const bcrypt = require('bcrypt');
+const hash = require('../../public/javascript/hash')
 
 // GET all users
 router.get('/', (req, res) => {
@@ -41,20 +43,55 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-router.get('/token/:username', (req, res) => {
+router.post('/login', function(req,res) {
+    console.log("login user", req.body.password)
+    console.log("login user is:", req.body.user)
     User.findOne({
         where: {
-            username: req.params.username
+            username: req.body.username,
+            // password_input: req.params.password_input
         },
-        attributes: { exclude: ['password'] }
+        // attributes: { exclude: ['password'] }
     })
     .then(dbUserData => {
+        let parse = JSON.parse(JSON.stringify(dbUserData))
+        console.log("login specific user is:", parse.password)
+        console.log("login password 2 is :", req.body.password)
+        let testPassword =  bcrypt.hash(parse.password, 10)
+        console.log("login password 3 is:", testPassword)
+    })
+
+
+})
+
+router.get(`/token/:username/:password_input`, (req, res) => {
+    User.findOne({
+        where: {
+            username: req.params.username,
+            // password_input: req.params.password_input
+        },
+        // attributes: { exclude: ['password'] }
+    })
+    .then(dbUserData => {
+
+
+
+        console.log("password input is :", req.params.password_input)
+        // console.log("user password is:", user.password)
+        // var passwordIsValid = bcrypt.compareSync(req.params.password, user.password)
+        // console.log(passwordIsValid)
+        // bcrypt.compare(loginPw, this.password)
+       let test =  bcrypt.hash(req.params.password_input, 10)
+       console.log("test is:", test)
         console.log(dbUserData)
         if (!dbUserData) {
             res.status(400).json({ message: 'No user found with this id' });
             return
         }
         res.json(dbUserData)
+    })
+    .then(test => {
+        console.log("test 2 is :", test)
     })
     .catch(err => res.status(500).json(err));
 });
