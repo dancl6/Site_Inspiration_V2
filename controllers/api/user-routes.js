@@ -10,7 +10,9 @@ router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['password'] }
     })
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbUserData => {
+
+        res.json(dbUserData)})
     .catch(err => res.status(500).json(err));
 });
 
@@ -29,6 +31,25 @@ router.get('/:id', (req, res) => {
         attributes: { exclude: ['password'] }
     })
     .then(dbUserData => {
+        console.log(dbUserData)
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user found with this id' });
+            return
+        }
+        res.json(dbUserData)
+    })
+    .catch(err => res.status(500).json(err));
+});
+
+router.get('/token/:username', (req, res) => {
+    User.findOne({
+        where: {
+            username: req.params.username
+        },
+        attributes: { exclude: ['password'] }
+    })
+    .then(dbUserData => {
+        console.log(dbUserData)
         if (!dbUserData) {
             res.status(400).json({ message: 'No user found with this id' });
             return
@@ -39,25 +60,22 @@ router.get('/:id', (req, res) => {
 });
 
 //GET single user and sign token then return token
-router.get('/:id/token', (req, res) => {
+router.get(`/token/:username`, (req, res) => {
     User.findOne({
         where: {
-            id: req.params.id
+            username: req.params.username
         },
         attributes: { exclude: ['password'] }
     })
     .then(dbUserData => {
-        const token = signToken(dbUserData.username, dbUserData.email, dbUserData.id)
-        if (!dbUserData) {
-            res.status(400).json({ message: 'No user found with this id' });
-            return
-        }
-    res.json(token)
-        // res.json(token)
-    })
-    .then(token => {
-        Auth.login(token)
-    })
+        console.log(dbUserData)
+        // console.log("username is :", username)
+        res.json(dbUserData)
+    }) 
+    // .catch(err => res.status(500).json(err));
+    // .then(token => {
+    //     Auth.login(token)
+    // })
     .catch(err => res.status(500).json(err));
 });
 
