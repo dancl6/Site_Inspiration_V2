@@ -5,7 +5,7 @@ const { User } = require('../../models');
 // const isAuth = require('../../utils/middleware/isAuth');
 const { signToken } = require('../../utils/auth')
 const bcrypt = require('bcrypt');
-const hash = require('../../public/javascript/hash')
+// const hash = require('../../public/javascript/hash')
 
 // GET all users
 router.get('/', (req, res) => {
@@ -57,8 +57,10 @@ router.post('/login', function(req,res) {
         let parse = JSON.parse(JSON.stringify(dbUserData))
         console.log("login specific user is:", parse.password)
         console.log("login password 2 is :", req.body.password)
-        let testPassword =  bcrypt.hash(parse.password, 10)
-        console.log("login password 3 is:", testPassword)
+        // let testPassword =  bcrypt.hash(parse.password, 10)
+        // console.log("login password 3 is:", testPassword)
+        var passwordIsValid = bcrypt.compareSync( req.body.password,  parse.password)
+        console.log("is password valid test:", passwordIsValid)
     })
 
 
