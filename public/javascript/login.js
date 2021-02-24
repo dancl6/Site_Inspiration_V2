@@ -20,6 +20,7 @@ async function loginFormHandler(event) {
         })
 
         if (response.ok) {
+            console.log("response is :", response)
             document.location.replace('/')
         } else {
             alert(response.statusText)

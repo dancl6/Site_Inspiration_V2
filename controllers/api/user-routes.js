@@ -5,6 +5,9 @@ const { User } = require('../../models');
 // const isAuth = require('../../utils/middleware/isAuth');
 const { signToken } = require('../../utils/auth')
 const bcrypt = require('bcrypt');
+const Auth = require('../../public/utils/auth')
+// import { Auth } from '../../public/utils/auth';
+
 // const Auth = require ("../../utils/auth2")
 // const hash = require('../../public/javascript/hash')
 
@@ -65,7 +68,7 @@ router.post('/login', function(req,res) {
 
         if(passwordIsValid) {
         var token = signToken(parse.username, parse.email, parse.id)
-        // Auth.login(token)
+        Auth.login(token)
         console.log("token is :", token)
         }
     })
