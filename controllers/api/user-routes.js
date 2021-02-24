@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/login', function(req,res) {
     console.log("login user", req.body.password)
-    console.log("login user is:", req.body.user)
+    // console.log("login user is:", req.body.user)
     User.findOne({
         where: {
             username: req.body.username,
@@ -72,7 +72,7 @@ router.post('/login', function(req,res) {
         console.log("token is :", token)
         }
     })
-
+    .catch(err => res.status(500).json(err));
 
 })
 

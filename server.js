@@ -52,6 +52,6 @@ app.use(routes);
 const db = require("./models");
 const Role = db.role;
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on port ${PORT}!`));
 });
