@@ -5,7 +5,7 @@ const { User } = require('../../models');
 // const isAuth = require('../../utils/middleware/isAuth');
 const { signToken } = require('../../utils/auth')
 const bcrypt = require('bcrypt');
-const { Auth } = require('../../public/utils/auth')
+const  Auth  = require('../../public/utils/auth')
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./scratch');
@@ -77,8 +77,9 @@ router.post('/login', function(req,res) {
         console.log("token is :", token);
         var idToken = token
         localStorage.setItem("lastname", "Smith");
-        localStorage.setItem('id_token', idToken);
-        // Auth.login(idToken);
+        // localStorage.setItem('id_token', idToken);
+        Auth.login(idToken)
+        Auth.testConsole()
         // localStorage.removeItem('id_token');
         console.log("get local storage", localStorage.getItem("id_token"))
         }

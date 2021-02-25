@@ -12,6 +12,10 @@ module.exports = {
     return decode(this.getToken());
   },
 
+    testConsole: function() {
+      console.log("testing import")
+    },
+
   // loggedIn() {
     loggedIn: function(){
     // Checks if there is a saved token and it's still valid
@@ -39,6 +43,12 @@ module.exports = {
 
   // login(idToken) {
     login: function(idToken) {
+    
+      if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        localStorage = new LocalStorage('./scratch');
+      }
+
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
