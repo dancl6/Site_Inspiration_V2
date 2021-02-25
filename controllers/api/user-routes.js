@@ -5,7 +5,13 @@ const { User } = require('../../models');
 // const isAuth = require('../../utils/middleware/isAuth');
 const { signToken } = require('../../utils/auth')
 const bcrypt = require('bcrypt');
-const Auth = require('../../public/utils/auth')
+const { Auth } = require('../../public/utils/auth')
+if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+// const LocalStorage = require('node-localstorage').LocalStorage,
+// localStorage = new LocalStorage('./scratch')
 // import { Auth } from '../../public/utils/auth';
 
 // const Auth = require ("../../utils/auth2")
@@ -66,10 +72,15 @@ router.post('/login', function(req,res) {
         var passwordIsValid = bcrypt.compareSync( req.body.password,  parse.password)
         console.log("is password valid test:", passwordIsValid)
 
-        if(passwordIsValid) {
+        if(passwordIsValid === true) {
         var token = signToken(parse.username, parse.email, parse.id)
-        Auth.login(token)
-        console.log("token is :", token)
+        console.log("token is :", token);
+        var idToken = token
+        localStorage.setItem("lastname", "Smith");
+        localStorage.setItem('id_token', idToken);
+        // Auth.login(idToken);
+        // localStorage.removeItem('id_token');
+        console.log("get local storage", localStorage.getItem("id_token"))
         }
     })
     .catch(err => res.status(500).json(err));
