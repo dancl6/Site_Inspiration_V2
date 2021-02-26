@@ -1,9 +1,9 @@
 // import decode from 'jwt-decode';
 const decode = require('jwt-decode');
-if (typeof localStorage === "undefined" || localStorage === null) {
-  var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
-}
+// if (typeof localStorage === "undefined" || localStorage === null) {
+//   var LocalStorage = require('node-localstorage').LocalStorage;
+//   localStorage = new LocalStorage('./scratch');
+// }
 module.exports = {
 // class AuthService {
   // signToken: function({ username, email, id }) {
@@ -12,8 +12,11 @@ module.exports = {
     return decode(this.getToken());
   },
 
-    testConsole: function() {
+    testConsole: function(idToken) {
       console.log("testing import")
+      localStorage.setItem('testing', 'testingval');
+      localStorage.setItem('id_token', idToken);
+      window.location.assign('/');
     },
 
   // loggedIn() {
@@ -52,7 +55,7 @@ module.exports = {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
-    window.location.assign('/');
+    // window.location.assign('/');
   },
 
   // logout() {
@@ -60,7 +63,7 @@ module.exports = {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
     // this will reload the page and reset the state of the application
-    window.location.assign('/');
+    // window.location.assign('/');
   }
 }
 

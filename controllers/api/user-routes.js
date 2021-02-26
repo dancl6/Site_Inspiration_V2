@@ -78,8 +78,8 @@ router.post('/login', function(req,res) {
         var idToken = token
         localStorage.setItem("lastname", "Smith");
         // localStorage.setItem('id_token', idToken);
-        Auth.login(idToken)
-        Auth.testConsole()
+        // Auth.login(idToken)
+        Auth.testConsole(idToken)
         // localStorage.removeItem('id_token');
         console.log("get local storage", localStorage.getItem("id_token"))
         }
