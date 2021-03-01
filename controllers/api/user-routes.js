@@ -88,6 +88,26 @@ router.post('/login', function(req,res) {
 
 })
 
+router.get('/get_user', (req, res) => {
+   let currentUserToken =  Auth.getToken()
+   let currentUser = authMiddleware(currentUserToken)
+   console.log("i am at current user:", currentUser)
+   User.findOne({
+    where: {
+        username: "yogananda",
+        // password_input: req.params.password_input
+    },
+    // attributes: { exclude: ['password'] }
+})
+
+.then (userData => {
+    // res.render('/')
+    res.json(userData)
+})
+.catch(err => res.status(500).json(err));
+})
+
+
 router.get(`/token/:username/:password_input`, (req, res) => {
     User.findOne({
         where: {
