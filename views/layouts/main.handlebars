@@ -11,6 +11,7 @@
   </head>
 
   <body>
+
     <div class="wrapper">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,6 +25,7 @@
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/products">Products</a>
             </li>
+
             {{#if loggedIn}}
             <li class="nav-item active">
               <button id="logout" class="btn dark-mode-light-text">Logout</button>
@@ -57,7 +59,8 @@
       </nav>
     </header>
         {{{body}}}
+             <li class="nav-item active">
+              <a class="nav-link dark-mode-light-text" href="/user">Get User</a>
+            </li>
   </body>
 </html>
-
-<script src="/javascript/get_User.js"></script>

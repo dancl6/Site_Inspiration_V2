@@ -2,13 +2,13 @@
 
 
 async function loginFormHandler(event) {
-    // event.preventDefault();
+    event.preventDefault();
   
     // const username = document.querySelector('#username-login').value.trim();
     // const password = document.querySelector('#password-login').value.trim();
   
     // if (username && password) {
-
+        console.log("I GET HERE")
         const response = await fetch('/api/users/get_user', {
             method: 'get',
             // body: JSON.stringify({
@@ -69,5 +69,4 @@ async function loginFormHandler(event) {
     // }
   }
 // }
-//   document.querySelector('#submitButton').addEventListener('click', loginFormHandler);
-  loginFormHandler()
+document.querySelector('#get-me').addEventListener('click', loginFormHandler);
