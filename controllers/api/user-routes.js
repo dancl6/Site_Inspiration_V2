@@ -76,10 +76,10 @@ router.post('/login', function(req,res) {
         var token = signToken(parse.username, parse.email, parse.id)
         console.log("token is :", token);
         var idToken = token
-        localStorage.setItem("lastname", "Smith");
+        // localStorage.setItem("lastname", "Smith");
         // localStorage.setItem('id_token', idToken);
-        // Auth.login(idToken)
-        Auth.testConsole(idToken)
+        Auth.login(idToken)
+        // Auth.testConsole(idToken)
         // localStorage.removeItem('id_token');
         console.log("get local storage", localStorage.getItem("id_token"))
         }
@@ -99,13 +99,12 @@ router.get('/get_user', (req, res) => {
     },
     // attributes: { exclude: ['password'] }
 })
-
 .then (userData => {
     // res.render('/')
     res.json(userData)
 })
 .catch(err => res.status(500).json(err));
-})
+});
 
 
 router.get(`/token/:username/:password_input`, (req, res) => {
