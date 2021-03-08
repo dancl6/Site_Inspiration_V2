@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const jwt = require("jsonwebtoken")
 // const sequelize = require('../../config/connection')
 // const passport = require('../../utils/passport');
 // const isAuth = require('../../utils/middleware/isAuth');
-const { signToken } = require('../../utils/auth')
+const { signToken, authMiddleware } = require('../../utils/auth')
 const bcrypt = require('bcrypt');
 const  Auth  = require('../../public/utils/auth')
+const decode = require('../../public/utils/decode_jwt')
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./scratch');
@@ -54,7 +56,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/login', function(req,res) {
-    console.log("login user", req.body.password)
+    // console.log("login user", req.body.password)
     // console.log("login user is:", req.body.user)
     User.findOne({
         where: {
@@ -64,25 +66,23 @@ router.post('/login', function(req,res) {
         // attributes: { exclude: ['password'] }
     })
     .then(dbUserData => {
-        let parse = JSON.parse(JSON.stringify(dbUserData))
-        console.log("login specific user is:", parse.password)
-        console.log("login password 2 is :", req.body.password)
-        // let testPassword =  bcrypt.hash(parse.password, 10)
-        // console.log("login password 3 is:", testPassword)
-        var passwordIsValid = bcrypt.compareSync( req.body.password,  parse.password)
-        console.log("is password valid test:", passwordIsValid)
+        // let parse = JSON.parse(JSON.stringify(dbUserData))
+        // console.log("login specific user is:", parse.password)
+        // console.log("login password 2 is :", req.body.password)
 
-        if(passwordIsValid === true) {
-        var token = signToken(parse.username, parse.email, parse.id)
-        console.log("token is :", token);
-        var idToken = token
-        // localStorage.setItem("lastname", "Smith");
-        // localStorage.setItem('id_token', idToken);
-        Auth.login(idToken)
-        // Auth.testConsole(idToken)
-        // localStorage.removeItem('id_token');
-        console.log("get local storage", localStorage.getItem("id_token"))
-        }
+        // var passwordIsValid = bcrypt.compareSync( req.body.password,  parse.password)
+        // console.log("is password valid test:", passwordIsValid)
+
+        // if(passwordIsValid === true) {
+        // var token = signToken(parse.username, parse.email, parse.id)
+        // console.log("token is :", token);
+        // var idToken = token
+
+        // Auth.login(idToken)
+
+        // console.log("get local storage", localStorage.getItem("id_token"))
+        // }
+        res.json(JSON.parse(JSON.stringify(dbUserData)))
     })
     .catch(err => res.status(500).json(err));
 
@@ -90,11 +90,15 @@ router.post('/login', function(req,res) {
 
 router.get('/get_user', (req, res) => {
    let currentUserToken =  Auth.getToken()
-   let currentUser = authMiddleware(currentUserToken)
+//    let currentUser = authMiddleware(currentUserToken)
    console.log("i am at current user:", currentUser)
+//    req.body.token = currentUserToken
+    let userFromAuth = Auth.getProfile()
+//    let currentUser = authMiddleware(req)
+   console.log("current  user from auth  is, I AM HERE:",userFromAuth)
    User.findOne({
     where: {
-        username: "yogananda",
+        username: "dan",
         // password_input: req.params.password_input
     },
     // attributes: { exclude: ['password'] }
@@ -105,6 +109,90 @@ router.get('/get_user', (req, res) => {
 })
 .catch(err => res.status(500).json(err));
 });
+
+// build route slowly
+router.post('/test1', function(req,res) {
+    console.log("login user")
+   let currentUserToken =  Auth.getToken()
+   let userFromAuth = Auth.getProfile()
+   let testUser = decode.me(currentUserToken)
+//    console.log("test user is:", testUser)
+//    req.body.token = currentUserToken
+//    console.log("req body is:", req.body.token)
+//    let currentUser = authMiddleware(req.body.token)
+//    console.log("current user token is:", currentUserToken)
+   console.log("current user from auth is:", userFromAuth)
+//    req.body.token = currentUserToken
+//    let currentUser = authMiddleware(currentUserToken)
+   console.log("i am at test user:", testUser)
+    // console.log("login user is:", req.body.user)
+    User.findOne({
+        where: {
+            username: "dan",
+            // password_input: req.params.password_input
+        },
+    //     // attributes: { exclude: ['password'] }
+    })
+    .then(dbUserData => {
+        let parse = JSON.parse(JSON.stringify(dbUserData))
+        console.log("parse is :", parse)
+        res.json(parse)
+        // console.log("login specific user is:", parse.password)
+        // console.log("login password 2 is :", req.body.password)
+        // let testPassword =  bcrypt.hash(parse.password, 10)
+        // console.log("login password 3 is:", testPassword)
+        // var passwordIsValid = bcrypt.compareSync( req.body.password,  parse.password)
+        // console.log("is password valid test:", passwordIsValid)
+
+        // if(passwordIsValid === true) {
+        // var token = signToken(parse.username, parse.email, parse.id)
+        // console.log("token is :", token);
+        // var idToken = token
+        // // localStorage.setItem("lastname", "Smith");
+        // // localStorage.setItem('id_token', idToken);
+        // Auth.login(idToken)
+        // // Auth.testConsole(idToken)
+        // // localStorage.removeItem('id_token');
+        // console.log("get local storage", localStorage.getItem("id_token"))
+        // }
+    })
+    .catch(err => res.status(500).json(err));
+
+})
+
+const me = function(req,res){
+    if (req.headers && req.headers.authorization) {
+        var authorization = req.headers.authorization.split(' ')[1],
+            decoded;
+        try {
+            decoded = jwt.verify(authorization, secret.secretToken);
+        } catch (e) {
+            return res.status(401).send('unauthorized');
+        }
+        var userId = decoded.id;
+        // Fetch the user by id 
+        User.findOne({
+            where: {
+                id: req.params.id
+            },
+            id: userId}).then(function(user){
+            // Do something with the user
+            console.log("user from me is :", user)
+            return res.send(200);
+        });
+    }
+    return res.send(500);
+}
+
+router.get("/verify_token/:id", me, (req,res) => {
+    res.json(user.filter((id) => {
+
+        
+        user.name === req.user.name
+        
+    }))
+})
+
 
 
 router.get(`/token/:username/:password_input`, (req, res) => {

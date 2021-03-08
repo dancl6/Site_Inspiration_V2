@@ -1,3 +1,4 @@
+// const { signToken } = require("../../utils/auth");
 
 
 async function loginFormHandler(event) {
@@ -6,67 +7,62 @@ async function loginFormHandler(event) {
     const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
   
-    if (username && password) {
-
-        const response = await fetch('/api/users/login', {
-            method: 'post',
-            body: JSON.stringify({
-                username,
-                password
-            }),
-            headers: {
-                'Content-Type': 'application/json'
+    async function getUserInfo(username, password) {
+        await fetch(`/api/users/`, {
+          method: 'GET',
+        }).then((response) =>  response.json())
+        .then((data) => {
+            console.log("data is this:", data)
+            var userObject =  {
+                username: "",
+                email: "",
+                password: "",
+                id: ""
             }
-        })
+          for (let i = 0; i < data.length; i++) {
+              if((data[i].username === username) && (data[i].password === password)) {
+                userObject.username = data[i].username
+                userObject.email = data[i].email
+                userObject.password = data[i].password 
+                userObject.id = data[i].id
+                  break
+              }
+          }  
+          signToken(userObject.username, userObject.email, userObject.id)          
+        }) 
 
-        if (response.ok) {
-            console.log("response is :", response)
-            document.location.replace('/')
-        } else {
-            alert(response.statusText)
-        }
+          console.log("I AM HERE AT FOR ")
+            // res.json(userObject)
+        
+    }
+        getUserInfo(username, password)
 
-        // await fetch(`/api/users/token/${username}/${password}`, {
-        //     method: 'GET',
-        //     headers: {
-        //       'Accept': 'application/json',
-        //       'Content-Type': 'application/json'
-        //     }
-        //   })
+    // if (username && password) {
 
-    // .then(dbUsers =>{
-        // let test = JSON.parse(JSON.stringify(dbUsers))
-        // console.log(dbUsers.username)
-    // })
-    // .then(dbUser => {
-    //     fetch(`/api/users/1/token`, {
+    //     const response = await fetch('/api/users/login', {
     //         method: 'post',
     //         body: JSON.stringify({
-    //           username,
-    //           password
+    //             username,
+    //             password
     //         }),
     //         headers: {
-    //           'Content-Type': 'application/json'
+    //             'Content-Type': 'application/json'
     //         }
-    //       });
-      
-    //     //   if (response.ok) {
-    //     //     document.location.replace('/');
-    //     //   } else {
-    //     //     alert(response.statusText);
-    //     //   }
-    // })
+    //     })
 
+    //     if (response.ok) {
+    //         console.log("response is :", response)
+    //         // document.location.replace('/')
+    //     } else {
+    //         alert(response.statusText)
+        // }
 
+        // console.log(" we are at response :", data.username)
+        // const payload = { username, email, id };
 
-    //   try {
-    //       Auth.login(token)
-    //   } catch (e) {
-    //       console.log(e)
-    //   }
+        // return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
 
-    // }
   }
-}
+// }
   document.querySelector('#submitButton').addEventListener('click', loginFormHandler);
   
