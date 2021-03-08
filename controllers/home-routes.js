@@ -12,28 +12,28 @@ const {
 const isAuth = require('../utils/middleware/isAuth');
 const { login } = require('../public/utils/auth');
 
-router.get('/', (req,res) => {
-    User.findAll({})
-    .then(dbPostData => {
-        res.render('test')
-    })
-})
+// router.get('/', (req,res) => {
+//     User.findAll({})
+//     .then(dbPostData => {
+//         res.render('test')
+//     })
+// })
 
 //Sign-up page
 router.get('/signup', (req, res) => {
-    // if (req.session.loggedIn) {
-    //     res.redirect('/');
-    //     return;
-    // }
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
     res.render('signup');
 });
 
 //Login route/render
 router.get('/login', (req, res) => {
-    // if (req.session.loggedIn) {
-    //     res.redirect('/');
-    //     return;
-    // }
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
     res.render('login');
 });
 

@@ -2,8 +2,8 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const jwt = require("jsonwebtoken")
 // const sequelize = require('../../config/connection')
-// const passport = require('../../utils/passport');
-// const isAuth = require('../../utils/middleware/isAuth');
+const passport = require('../../utils/passport');
+const isAuth = require('../../utils/middleware/isAuth');
 const { signToken, authMiddleware } = require('../../utils/auth')
 const bcrypt = require('bcrypt');
 const  Auth  = require('../../public/utils/auth')
@@ -55,38 +55,13 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-router.post('/login', function(req,res) {
-    // console.log("login user", req.body.password)
-    // console.log("login user is:", req.body.user)
-    User.findOne({
-        where: {
-            username: req.body.username,
-            // password_input: req.params.password_input
-        },
-        // attributes: { exclude: ['password'] }
-    })
-    .then(dbUserData => {
-        // let parse = JSON.parse(JSON.stringify(dbUserData))
-        // console.log("login specific user is:", parse.password)
-        // console.log("login password 2 is :", req.body.password)
-
-        // var passwordIsValid = bcrypt.compareSync( req.body.password,  parse.password)
-        // console.log("is password valid test:", passwordIsValid)
-
-        // if(passwordIsValid === true) {
-        // var token = signToken(parse.username, parse.email, parse.id)
-        // console.log("token is :", token);
-        // var idToken = token
-
-        // Auth.login(idToken)
-
-        // console.log("get local storage", localStorage.getItem("id_token"))
-        // }
-        res.json(JSON.parse(JSON.stringify(dbUserData)))
-    })
-    .catch(err => res.status(500).json(err));
-
-})
+// use passport to authenticate login. if invalid credentials, passport will return unauthorized
+router.post('/login', passport.authenticate('local'), function(req, res) {
+    console.log("logged in is:",req.session.passport.user.id )
+    res.render('homepage', {
+      loggedIn: req.session.passport.user.id,
+    });
+  });
 
 router.get('/get_user', (req, res) => {
    let currentUserToken =  Auth.getToken()
