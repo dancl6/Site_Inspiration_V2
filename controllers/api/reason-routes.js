@@ -1,11 +1,18 @@
 const router = require('express').Router();
-const { Reason } = require('../../models');
+const { Reason, Quotes } = require('../../models');
 // const passport = require('../../utils/passport');
 // const isAuth = require('../../utils/middleware/isAuth');
 
 // GET all reasons
 router.get('/', (req, res) => {
     Reason.findAll({
+      include: [
+
+        {
+            model: Quotes,
+            // attributes: { exclude: ['password']},
+        }
+    ]
     })
     .then(reasonData => res.json(reasonData))
     .catch(err => res.status(500).json(err));
