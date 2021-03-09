@@ -55,7 +55,7 @@ router.get('/:id', (req, res) => {
 // use passport to authenticate login. if invalid credentials, passport will return unauthorized
 router.post('/login', passport.authenticate('local'), function(req, res) {
     console.log("logged in is:",req.session.passport.user.id )
-    res.render('homepage', {
+    res.render('question1', {
       loggedIn: req.session.passport.user.id,
     });
   });

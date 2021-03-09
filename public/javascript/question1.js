@@ -1,5 +1,3 @@
-// const { signToken } = require("../../utils/auth");
-
 
 async function loginFormHandler(event) {
     event.preventDefault();
@@ -20,7 +18,7 @@ async function loginFormHandler(event) {
         });
     
         if (response.ok) {
-          document.location.replace('/question1');
+          document.location.replace('/');
         } else {
           alert(response.statusText);
         }

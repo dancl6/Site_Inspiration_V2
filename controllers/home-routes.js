@@ -61,6 +61,14 @@ router.get('/user', (req, res) => {
     res.render('user');
 });
 
+router.get('/question1', (req, res) => {
+    // if (req.session.loggedIn) {
+    //     res.redirect('/');
+    //     return;
+    // }
+    res.render('question1');
+});
+
 router.get(`/:username/token`, (req,res) => {
     res.render('/')
 })
