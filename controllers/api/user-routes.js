@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Reason, Quotes } = require('../../models');
 // const jwt = require("jsonwebtoken")
 // const sequelize = require('../../config/connection')
 const passport = require('../../utils/passport');
@@ -17,15 +17,15 @@ const bcrypt = require('bcrypt');
 // const hash = require('../../public/javascript/hash')
 
 // GET all users
-router.get('/', (req, res) => {
-    User.findAll({
-        attributes: { exclude: ['password'] }
-    })
-    .then(dbUserData => {
+// router.get('/', (req, res) => {
+//     User.findAll({
+//         attributes: { exclude: ['password'] }
+//     })
+//     .then(dbUserData => {
 
-        res.json(dbUserData)})
-    .catch(err => res.status(500).json(err));
-});
+//         res.json(dbUserData)})
+//     .catch(err => res.status(500).json(err));
+// });
 
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
@@ -61,7 +61,26 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
   });
 
 
+//GET all users
+router.get('/', (req, res) => {
+    User.findAll({
+        // attributes: ['id', 'category_name'],
+        include: [
 
+        {
+            model: Quotes,
+            // attributes: { exclude: ['password']},
+        }
+    ]
+    
+        
+    })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+});
 
 //POST create new user
 router.post('/', (req, res) => {
