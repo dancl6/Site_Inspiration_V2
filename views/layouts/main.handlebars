@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Inspiration</title>
-    {{!-- <link rel="stylesheet" href="/css/dark-mode.css" />
+    <link rel="stylesheet" href="/css/dark-mode.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.0/font/css/open-iconic-bootstrap.min.css" />     --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.0/font/css/open-iconic-bootstrap.min.css" />    
   </head>
 
   <body>
@@ -15,14 +15,14 @@
     <div class="wrapper">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand dark-mode-light-text" href="/">Tech Stop-N-Shop</a>
+        <a class="navbar-brand dark-mode-light-text" href="/">Site Inspiration</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            {{!-- <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/products">Products</a>
             </li>
             <li class="nav-item active">
@@ -30,7 +30,7 @@
             </li>
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/test2">Test2</a>
-            </li>
+            </li> --}}
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/signup">Sign Up Here!</a>
             </li>
@@ -39,7 +39,7 @@
             <li class="nav-item active">
               <button id="logout" class="btn dark-mode-light-text">Logout</button>
             </li>
-            <li class="nav-item active">
+            {{!-- <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/user">User Page</a>
             </li>
             <li class="nav-item active">
@@ -47,7 +47,7 @@
             </li> 
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" id="replenish-inventory" href="/profit" >Replenish Inventory</a>
-            </li> 
+            </li>  --}}
             {{else}}
             <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/login" id="login">Login</a>
@@ -59,18 +59,18 @@
               <label class="custom-control-label" for="darkSwitch"><span class="oi oi-contrast" title="oi-contrast" aria-hidden="true"></span></label>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0 mr-2">
+          {{!-- <form class="form-inline my-2 my-lg-0 mr-2">
             <input class="form-control mr-sm-2" type="text" id="search-field" placeholder="Search By Keyword" aria-label="Search" style="width: 200px;">
             <button class="btn btn-outline-success my-2 my-sm-0 dark-mode-light-text" id="search-btn" type="submit"><span class="oi oi-magnifying-glass"></span></button>
-          </form>
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#cart"><span class="oi oi-cart"></span> (<span class="total-count"></span>)</button></div>
+          </form> --}}
+            {{!-- <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#cart"><span class="oi oi-cart"></span> (<span class="total-count"></span>)</button></div> --}}
         </div>
       </nav>
     </header>
         {{{body}}}
-             <li class="nav-item active">
+             {{!-- <li class="nav-item active">
               <a class="nav-link dark-mode-light-text" href="/user">Get User</a>
-            </li>
+            </li> --}}
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>
     {{!-- <script src="/javascript/replenish-inventory.js"></script>     --}}

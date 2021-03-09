@@ -96,6 +96,30 @@ router.post('/', (req, res) => {
         .catch(err => res.status(500).json(err));
     });
 
+// Update user table with dark mode toggle preference. Successfully updates value in table, but future implementation needed to retreive value from table and load into localstorage on login
+router.put('/dm', (req, res) => {
+    if (typeof req.session.passport != 'undefined') {
+        User.update({
+            dark_mode: req.body.dark_mode
+        }, 
+        {
+            where: {
+                id: req.session.passport.user.id
+            }
+        })
+        .then(dbUserData => {
+            if (!dbUserData[0]) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            console.log(`Successfully updated user table for ${req.session.passport.user.username} and dark mode is ${req.body.dark_mode}`)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    }
+});
 
 //PUT update user
 router.put('/:id', (req, res) => {
