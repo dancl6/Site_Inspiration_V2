@@ -69,3 +69,18 @@ body {
   }
 }
 
+.container-class {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.image-class {
+  width: 100%;
+}
+
+.form-class {
+  position: absolute;
+  top: 8px;
+  left: 16px
+}
