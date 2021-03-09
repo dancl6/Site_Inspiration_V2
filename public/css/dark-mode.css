@@ -82,5 +82,9 @@ body {
 .form-class {
   position: absolute;
   top: 8px;
-  left: 16px
+  left: 40%;
+}
+
+.width-class {
+  width: 60px;
 }
