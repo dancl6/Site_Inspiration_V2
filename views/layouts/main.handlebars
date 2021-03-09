@@ -68,6 +68,12 @@
             {{!-- <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#cart"><span class="oi oi-cart"></span> (<span class="total-count"></span>)</button></div> --}}
         </div>
       </nav>
+
+    {{!-- loading these before body since some views have separate functions that require jquery --}}
+    <script src="/javascript/jquery-3.5.1.slim.min.js"></script>
+    <script src="/javascript/popper.min.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
+
       {{{body}}}
       </div>
     </header>
@@ -78,7 +84,7 @@
             </li> --}}
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>
-    {{!-- <script src="/javascript/replenish-inventory.js"></script>     --}}
+    {{!-- <script src="/javascript/question1.js"></script>     --}}
     {{/if}}
   </body>
 </html>

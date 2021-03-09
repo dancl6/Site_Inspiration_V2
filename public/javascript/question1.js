@@ -1,29 +1,49 @@
 
-async function loginFormHandler(event) {
+async function question1FormHandler(event) {
+
+  
+
+
+//  var submitAnswer = function() {
     event.preventDefault();
-  
-    const username = document.querySelector('#username-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
-  
-    if (username && password) {
-        const response = await fetch('/api/users/login', {
-          method: 'post',
-          body: JSON.stringify({
-            username,
-            password
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+    var radios = document.getElementsByName('choice');
+    var val= "";
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+           val = radios[i].value; 
+           break;
+         }
+    }
     
-        if (response.ok) {
-          document.location.replace('/');
-        } else {
-          alert(response.statusText);
-        }
-      }
-  }
+
+
+    console.log("value for answer is:", val)
+  };
+
+
+
+    // const username = document.querySelector('#username-login').value.trim();
+    // const password = document.querySelector('#password-login').value.trim();
+  
+    // if (username && password) {
+    //     const response = await fetch('/api/users/login', {
+    //       method: 'post',
+    //       body: JSON.stringify({
+    //         username,
+    //         password
+    //       }),
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       }
+    //     });
+    
+    //     if (response.ok) {
+    //       document.location.replace('/');
+    //     } else {
+    //       alert(response.statusText);
+    //     }
+    //   }
+//   }
 // }
-  document.querySelector('#submitButton').addEventListener('click', loginFormHandler);
+  document.querySelector('#submitButton').addEventListener('click', question1FormHandler);
   

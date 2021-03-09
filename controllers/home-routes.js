@@ -61,7 +61,7 @@ router.get('/user', (req, res) => {
     res.render('user');
 });
 
-router.get('/question1', (req, res) => {
+router.get('/question1', isAuth, (req, res) => {
     // if (req.session.loggedIn) {
     //     res.redirect('/');
     //     return;
