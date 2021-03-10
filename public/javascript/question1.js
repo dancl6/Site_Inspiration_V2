@@ -20,7 +20,7 @@ async function question1FormHandler(event) {
     console.log("value for answer is:", val)
   };
 
-}
+
 
     // const username = document.querySelector('#username-login').value.trim();
     // const password = document.querySelector('#password-login').value.trim();
@@ -37,12 +37,12 @@ async function question1FormHandler(event) {
     //       }
     //     });
     
-        if (response.ok) {
+        if (val) {
           document.location.replace('/question2');
         } else {
           alert(response.statusText);
         }
-    //   }
+      }
 //   }
 // }
   document.querySelector('#submitButton').addEventListener('click', question1FormHandler);
