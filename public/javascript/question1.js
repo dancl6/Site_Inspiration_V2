@@ -4,7 +4,7 @@ async function question1FormHandler(event) {
   
 
 
-//  var submitAnswer = function() {
+ var response = function() {
     event.preventDefault();
     var radios = document.getElementsByName('choice');
     var val= "";
@@ -20,7 +20,7 @@ async function question1FormHandler(event) {
     console.log("value for answer is:", val)
   };
 
-
+}
 
     // const username = document.querySelector('#username-login').value.trim();
     // const password = document.querySelector('#password-login').value.trim();
@@ -37,11 +37,11 @@ async function question1FormHandler(event) {
     //       }
     //     });
     
-    //     if (response.ok) {
-    //       document.location.replace('/');
-    //     } else {
-    //       alert(response.statusText);
-    //     }
+        if (response.ok) {
+          document.location.replace('/question2');
+        } else {
+          alert(response.statusText);
+        }
     //   }
 //   }
 // }

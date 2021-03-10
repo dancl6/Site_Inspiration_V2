@@ -74,12 +74,16 @@ router.get('/question1', isAuth, (req, res) => {
 });
 
 router.get('/question2', isAuth, (req, res) => {
-    // if (req.session.loggedIn) {
-    //     res.redirect('/');
-    //     return;
-    // }
-    res.render('question2');
-});
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+        loginStatus = req.session.passport.user.id;
+    } else {
+        loginStatus = false;
+    }
+    res.render('question2', {
+        loggedIn: loginStatus
+    })
+})
 
 router.get(`/:username/token`, (req,res) => {
     res.render('/')
