@@ -62,11 +62,19 @@ router.get('/user', (req, res) => {
 });
 
 router.get('/question1', isAuth, (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('question1');
+});
+
+router.get('/question2', isAuth, (req, res) => {
     // if (req.session.loggedIn) {
     //     res.redirect('/');
     //     return;
     // }
-    res.render('question1');
+    res.render('question2');
 });
 
 router.get(`/:username/token`, (req,res) => {
