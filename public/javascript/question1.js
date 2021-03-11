@@ -16,10 +16,12 @@ async function question1FormHandler(event) {
          }
     }
     
-
+    let question1_LS = val
 
     console.log("value for answer is:", val)
     localStorage.setItem("question1", val)
+
+ 
 //   };
 
 

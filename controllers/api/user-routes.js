@@ -60,7 +60,23 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
     });
   });
 
+//   router.post('/question2', isAuth, (req, res) => {
+//     let loginStatus;
+//     let test = "happy"
+//     // let question1_LS = req.body.question1_LS
+//     // console.log(" i am at question 1 ls and it is:", question1_LS)
+//     if (typeof req.session.passport != 'undefined') {
+//         loginStatus = req.session.passport.user.id;
+//     } else {
+//         loginStatus = false;
+//     }
+//     res.render('question2', {
+//         loggedIn: loginStatus,
+//         test
+//     })
+// })
 
+  
 //GET all users
 router.get('/', (req, res) => {
     User.findAll({
