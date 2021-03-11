@@ -17,7 +17,11 @@ router.get('/', (req, res) => {
     
         
     })
-    .then(dbQuotesData => res.json(dbQuotesData))
+    .then(dbQuotesData => {
+      let test = JSON.parse(JSON.stringify(dbQuotesData))
+      console.log(" parsed quotes is:", test)  
+        res.json(dbQuotesData)
+    })
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
