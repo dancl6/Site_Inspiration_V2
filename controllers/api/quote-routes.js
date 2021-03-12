@@ -1,6 +1,43 @@
 const router = require('express').Router();
 const { Quotes, User, User_Quotes, Reason } = require('../../models');
 
+
+
+router.post('/emotion', (req,res) => {
+    console.log("emotion reason is 1:", req.body)
+    Quotes.findAll({
+        // attributes: ['id', 'category_name'],
+        include: [
+        {
+            model: Reason
+        },
+        {
+            model: User,
+            attributes: { exclude: ['password']},
+        }
+    ]      
+    })
+    .then(dbQuotesData => {
+        let test = JSON.parse(JSON.stringify(dbQuotesData))
+        console.log("emotion reason is:", req.body.testing)
+        console.log(" parsed quotes is:", test)  
+        console.log("single quotes is:", test[0].reason.reason_tag)
+        let quotesArrayReason = []
+        for (let i = 0; i < test.length; i++) {
+            if(test[i].reason.reason_tag === req.body.testing) {
+                quotesArrayReason.push(test[i])
+            }
+        }
+        console.log("quotes array reason is:", quotesArrayReason)
+          res.json(quotesArrayReason)
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+      })
+})
+
+
 //GET all quotes
 router.get('/', (req, res) => {
     Quotes.findAll({
@@ -18,8 +55,15 @@ router.get('/', (req, res) => {
         
     })
     .then(dbQuotesData => {
-      let test = JSON.parse(JSON.stringify(dbQuotesData))
-      console.log(" parsed quotes is:", test)  
+    //   let test = JSON.parse(JSON.stringify(dbQuotesData))
+    //   console.log(" parsed quotes is:", test)  
+    //   console.log("single quotes is:", test[0].reason.reason_tag)
+    //   let quotesArrayReason = []
+    //   for (let i = 0; i < test.length; i++) {
+    //       if(test[i].reason.reason_tag === 1) {
+
+    //       }
+    //   }
         res.json(dbQuotesData)
     })
     .catch(err => {

@@ -14,12 +14,20 @@ async function quoteFormHandler(event) {
     console.log(" emotion reason is:", emotionReason)
     
     async function getQuote(emotionReason) {
-        await fetch(`/api/quotes`, {
-          method: 'GET',
-        }).then((response) => {
-            console.log("quotes are :", response)
-            response.json()
-        } )
+        await fetch(`/api/quotes/emotion`, {
+          method: 'POST',
+          body: JSON.stringify({
+            "testing": emotionReason
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        // .then((response) => {
+        //     console.log("quotes are :", response)
+        //     // console.log("single quote is:", response[0])
+        //     response.json()
+        // } )
         // .then((data)=> {})
     }
 
