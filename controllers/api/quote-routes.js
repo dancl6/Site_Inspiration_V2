@@ -29,7 +29,11 @@ router.post('/emotion', (req,res) => {
             }
         }
         console.log("quotes array reason is:", quotesArrayReason)
-          res.json(quotesArrayReason)
+        //   res.json(quotesArrayReason)
+        res.render('quote2', {
+            // loggedIn: loginStatus,
+            quotesArrayReason
+        })
       })
       .catch(err => {
           console.log(err);

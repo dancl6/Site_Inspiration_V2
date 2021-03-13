@@ -40,11 +40,11 @@ async function quoteFormHandler(event) {
 
 
     
-        // if (val) {
-        //   document.location.replace('/question2');
-        // } else {
-        //   alert(response.statusText);
-        // }
+        if (emotionReason) {
+          document.location.replace('/quote2');
+        } else {
+          alert(response.statusText);
+        }
 
       }
 //   }

@@ -61,6 +61,18 @@ router.get('/user', (req, res) => {
     res.render('user');
 });
 
+router.get('/quote2', (req, res) => {
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+        loginStatus = req.session.passport.user.id;
+    } else {
+        loginStatus = false;
+    }
+    res.render('quote2', {
+        loggedIn: loginStatus
+    })
+});
+
 router.get('/question1', isAuth, (req, res) => {
     let loginStatus;
     if (typeof req.session.passport != 'undefined') {
