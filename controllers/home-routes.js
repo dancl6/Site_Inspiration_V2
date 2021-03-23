@@ -119,17 +119,17 @@ router.get(`/:username/token`, (req,res) => {
     res.render('/')
 })
 
-router.get(`/`, (req,res) => {
-    let loginStatus;
-    if (typeof req.session.passport != 'undefined') {
-        loginStatus = req.session.passport.user.id;
-    } else {
-        loginStatus = false;
-    }
-    res.render('homepage', {
-        loggedIn: loginStatus
-    })
-})
+// router.get(`/`, (req,res) => {
+//     let loginStatus;
+//     if (typeof req.session.passport != 'undefined') {
+//         loginStatus = req.session.passport.user.id;
+//     } else {
+//         loginStatus = false;
+//     }
+//     res.render('homepage', {
+//         loggedIn: loginStatus
+//     })
+// })
 
 
 //GET all quotes

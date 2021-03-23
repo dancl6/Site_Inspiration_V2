@@ -18,6 +18,17 @@ async function loginFormHandler(event) {
         }).then((response) => response.json())
         .then((data) => {
             console.log(data)
+            fetch('/api/users/brainy', {
+                method: 'get',
+                // body: JSON.stringify({
+                //   data
+                // }),
+                // headers: {
+                //   'Content-Type': 'application/json'
+                // }
+              });
+
+
         })
     
         // if (response.ok) {

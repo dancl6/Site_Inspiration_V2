@@ -60,6 +60,21 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
     });
   });
 
+  router.get('/brainy',  function(req, res) {
+          let loginStatus;
+        if (typeof req.session.passport != 'undefined') {
+            loginStatus = req.session.passport.user.id;
+        } else {
+            loginStatus = false;
+        }
+
+    console.log("brainy data is :", data )
+    res.render('homepage', {
+      data,
+      loggedIn: loginStatus
+    });
+  });
+
 //   router.post('/question2', isAuth, (req, res) => {
 //     let loginStatus;
 //     let test = "happy"
