@@ -119,18 +119,32 @@ router.get(`/:username/token`, (req,res) => {
     res.render('/')
 })
 
-// router.get(`/`, (req,res) => {
-//     let loginStatus;
-//     if (typeof req.session.passport != 'undefined') {
-//         loginStatus = req.session.passport.user.id;
-//     } else {
-//         loginStatus = false;
-//     }
-//     res.render('homepage', {
-//         loggedIn: loginStatus
-//     })
-// })
+router.post(`/`, (req,res) => {
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+        loginStatus = req.session.passport.user.id;
+    } else {
+        loginStatus = false;
+    }
+    res.render('homepage', {
+        loggedIn: loginStatus
+    })
+})
 
+  router.post('/brainy',  function(req, res) {
+          let loginStatus;
+        if (typeof req.session.passport != 'undefined') {
+            loginStatus = req.session.passport.user.id;
+        } else {
+            loginStatus = false;
+        }
+
+    console.log("brainy data is :", data )
+    res.render('display-quotes', {
+      data,
+      loggedIn: loginStatus
+    });
+  });
 
 //GET all quotes
 // router.get('/', (req, res) => {
