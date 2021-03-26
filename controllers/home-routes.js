@@ -131,17 +131,17 @@ router.post(`/`, (req,res) => {
     })
 })
 
-  router.post('/brainy',  function(req, res) {
-          let loginStatus;
-        if (typeof req.session.passport != 'undefined') {
-            loginStatus = req.session.passport.user.id;
-        } else {
-            loginStatus = false;
-        }
+  router.get('/brainy',  function(req, res) {
+        //   let loginStatus;
+        // if (typeof req.session.passport != 'undefined') {
+        //     loginStatus = req.session.passport.user.id;
+        // } else {
+        //     loginStatus = false;
+        // }
 
-    console.log("brainy data is :", data )
+    // console.log("brainy data is :", data )
     res.render('display-quotes', {
-      data,
+    //   data,
       loggedIn: loginStatus
     });
   });

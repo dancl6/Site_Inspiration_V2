@@ -13,13 +13,13 @@ async function loginFormHandler(event) {
         .then((data) => {
         //     console.log(data)
          await   fetch('/brainy', {
-                method: 'post',
-                body: JSON.stringify({
-                  data
-                }),
-                headers: {
-                  'Content-Type': 'application/json'
-                }
+                method: 'get',
+                // body: JSON.stringify({
+                //   data
+                // }),
+                // headers: {
+                //   'Content-Type': 'application/json'
+                // }
               });
         //       document.location.replace('/display-quotes');
 
