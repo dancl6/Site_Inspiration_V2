@@ -131,7 +131,7 @@ router.post(`/`, (req,res) => {
     })
 })
 
-  router.get('/brainy',  function(req, res) {
+  router.get('/display-quotes',  function(req, res) {
         //   let loginStatus;
         // if (typeof req.session.passport != 'undefined') {
         //     loginStatus = req.session.passport.user.id;
@@ -142,8 +142,8 @@ router.post(`/`, (req,res) => {
     // console.log("brainy data is :", data )
     res.render('display-quotes', {
     //   data,
-      loggedIn: loginStatus
-    });
+    //   loggedIn: loginStatus
+    })
   });
 
 //GET all quotes

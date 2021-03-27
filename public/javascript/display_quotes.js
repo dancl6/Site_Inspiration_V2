@@ -1,6 +1,6 @@
 
-async function loginFormHandler(event) {
-    event.preventDefault();
+// async function loginFormHandler(event) {
+    // event.preventDefault();
     let category = localStorage.getItem('category')
     // const category = document.querySelector('#quote-category').value.trim();
     // const password = document.querySelector('#password-login').value.trim();
@@ -12,7 +12,7 @@ async function loginFormHandler(event) {
         }).then((response) => response.json())
         .then((data) => {
         //     console.log(data)
-         await   fetch('/brainy', {
+         await   fetch('/display-quotes', {
                 method: 'get',
                 // body: JSON.stringify({
                 //   data
@@ -26,7 +26,7 @@ async function loginFormHandler(event) {
         })
     
 
-  }
+//   }
 
-  document.querySelector('#submitButton').addEventListener('click', loginFormHandler);
+//   document.querySelector('#submitButton').addEventListener('click', loginFormHandler);
   
